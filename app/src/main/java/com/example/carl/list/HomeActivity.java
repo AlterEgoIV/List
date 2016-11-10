@@ -8,10 +8,14 @@ import android.widget.ListView;
 
 public class HomeActivity extends ListActivity {
 
+    private ListDatabaseManager listDatabaseManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        listDatabaseManager = new ListDatabaseManager(this);
     }
 
     @Override
