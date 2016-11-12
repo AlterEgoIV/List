@@ -17,15 +17,25 @@ public class ListDatabaseManager
     public static final String KEY_LISTNAME = "list_name";
     public static final String KEY_LIST_DESCRIPTION = "list_description";
 
+    public static final String KEY_ITEMNAME = "item_name";
+    public static final String KEY_ITEM_DESCRIPTION = "item_description";
+
     private static final String DATABASE_NAME = "ListDatabase";
-    private static final String DATABASE_TABLE = "List";
+    private static final String DATABASE_TABLE_LIST = "List";
+    private static final String DATABASE_TABLE_ITEM = "Item";
     private static final int DATABASE_VERSION = 1;
 
-    private static final String DATABASE_CREATE =
-            "create table Tasks " +
-                    "(_id integer primary key autoincrement, " +
-                    "list_name text not null, " +
-                    "list_description text not null);";
+    private static final String DATABASE_CREATE_LIST =
+            "create table " + DATABASE_TABLE_LIST +
+                    "(" + KEY_ROWID + " integer primary key autoincrement, " +
+                    KEY_LISTNAME + " text not null, " +
+                    KEY_LIST_DESCRIPTION + " text not null);";
+
+    private static final String DATABASE_CREATE_ITEM =
+            "create table " + DATABASE_TABLE_ITEM +
+                    "(" + KEY_ROWID + " integer primary key autoincrement, " +
+                    KEY_ITEMNAME + " text not null, " +
+                    KEY_ITEM_DESCRIPTION + " text not null);";
 
     private final Context context;
     private DatabaseHelper DBHelper;
@@ -47,7 +57,8 @@ public class ListDatabaseManager
         @Override
         public void onCreate(SQLiteDatabase db)
         {
-            db.execSQL(DATABASE_CREATE);
+            db.execSQL(DATABASE_CREATE_LIST);
+            db.execSQL(DATABASE_CREATE_ITEM);
         }
 
         @Override
@@ -69,22 +80,35 @@ public class ListDatabaseManager
         DBHelper.close();
     }
 
-    public long insertItem(String taskName, String taskDescription, int completeStatus)
+    public long insertList(String listName, String listDescription)
     {
         ContentValues initialValues = new ContentValues();
-        initialValues.put(KEY_LISTNAME, taskName);
-        initialValues.put(KEY_LIST_DESCRIPTION, taskDescription);
-        return db.insert(DATABASE_TABLE, null, initialValues);
+        initialValues.put(KEY_LISTNAME, listName);
+        initialValues.put(KEY_LIST_DESCRIPTION, listDescription);
+        return db.insert(DATABASE_TABLE_LIST, null, initialValues);
     }
 
-    public boolean deleteTask(long rowId)
+    public long insertItem(String itemName, String itemDescription)
     {
-        return db.delete(DATABASE_TABLE, KEY_ROWID + "=" + rowId, null) > 0;
+        ContentValues initialValues = new ContentValues();
+        initialValues.put(KEY_LISTNAME, itemName);
+        initialValues.put(KEY_LIST_DESCRIPTION, itemDescription);
+        return db.insert(DATABASE_TABLE_LIST, null, initialValues);
     }
 
-    public Cursor getAllTasks()
+    public boolean deleteList(long rowId)
     {
-        return db.query(DATABASE_TABLE, new String[]
+        return db.delete(DATABASE_TABLE_LIST, KEY_ROWID + "=" + rowId, null) > 0;
+    }
+
+    public boolean deleteItem(long rowId)
+    {
+        return db.delete(DATABASE_TABLE_LIST, KEY_ROWID + "=" + rowId, null) > 0;
+    }
+
+    public Cursor getAllLists()
+    {
+        return db.query(DATABASE_TABLE_LIST, new String[]
                         {
                                 KEY_ROWID,
                                 KEY_LISTNAME,
@@ -93,10 +117,21 @@ public class ListDatabaseManager
                 null, null, null, null, null);
     }
 
-    public Cursor getTask(long rowId) throws SQLException
+    public Cursor getAllItems()
+    {
+        return db.query(DATABASE_TABLE_ITEM, new String[]
+                        {
+                                KEY_ROWID,
+                                KEY_ITEMNAME,
+                                KEY_ITEM_DESCRIPTION
+                        },
+                null, null, null, null, null);
+    }
+
+    public Cursor getList(long rowId) throws SQLException
     {
         Cursor mCursor =
-                db.query(true, DATABASE_TABLE, new String[]
+                db.query(true, DATABASE_TABLE_LIST, new String[]
                                 {
                                         KEY_ROWID,
                                         KEY_LISTNAME,
@@ -112,11 +147,38 @@ public class ListDatabaseManager
         return mCursor;
     }
 
-    public boolean updateTask(long rowId, String taskName, String taskDescription, int completeStatus)
+    public Cursor getItem(long rowId) throws SQLException
+    {
+        Cursor mCursor =
+                db.query(true, DATABASE_TABLE_ITEM, new String[]
+                                {
+                                        KEY_ROWID,
+                                        KEY_ITEMNAME,
+                                        KEY_ITEM_DESCRIPTION
+                                },
+                        KEY_ROWID + "=" + rowId,  null, null, null, null, null);
+
+        if (mCursor != null)
+        {
+            mCursor.moveToFirst();
+        }
+
+        return mCursor;
+    }
+
+    public boolean updateList(long rowId, String listName, String listDescription)
     {
         ContentValues args = new ContentValues();
-        args.put(KEY_LISTNAME, taskName);
-        args.put(KEY_LIST_DESCRIPTION, taskDescription);
-        return db.update(DATABASE_TABLE, args, KEY_ROWID + "=" + rowId, null) > 0;
+        args.put(KEY_LISTNAME, listName);
+        args.put(KEY_LIST_DESCRIPTION, listDescription);
+        return db.update(DATABASE_TABLE_LIST, args, KEY_ROWID + "=" + rowId, null) > 0;
+    }
+
+    public boolean updateItem(long rowId, String itemName, String itemDescription)
+    {
+        ContentValues args = new ContentValues();
+        args.put(KEY_ITEMNAME, itemName);
+        args.put(KEY_ITEM_DESCRIPTION, itemDescription);
+        return db.update(DATABASE_TABLE_ITEM, args, KEY_ROWID + "=" + rowId, null) > 0;
     }
 }
