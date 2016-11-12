@@ -13,7 +13,6 @@ import android.widget.ListView;
 public class HomeActivity extends ListActivity {
 
     private ListDatabaseManager listDatabaseManager;
-    //private FloatingActionButton
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +26,8 @@ public class HomeActivity extends ListActivity {
         //listDatabaseManager.insertItem("FFXV", "New Final Fantasy");
         Cursor cursor = listDatabaseManager.getAllLists();
         cursor.moveToFirst();
-        String listName = cursor.getString(1);
-        Log.d("Listname", listName);
+        //String listName = cursor.getString(1);
+        //Log.d("Listname", listName);
         cursor.close();
         listDatabaseManager.close();
 
@@ -47,6 +46,4 @@ public class HomeActivity extends ListActivity {
     {
 
     }
-
-
 }
