@@ -23,7 +23,7 @@ public class HomeActivity extends ListActivity {
 
         listDatabaseManager.open();
         listDatabaseManager.insertList("Games", "The games");
-        listDatabaseManager.insertItem("FFXV", "New Final Fantasy");
+        listDatabaseManager.insertItem("FFXV");
         Cursor cursor = listDatabaseManager.getAllLists();
         cursor.moveToFirst();
         //String listName = cursor.getString(1);

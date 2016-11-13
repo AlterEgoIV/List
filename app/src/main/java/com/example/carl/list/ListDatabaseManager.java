@@ -18,7 +18,6 @@ public class ListDatabaseManager
     public static final String KEY_LIST_DESCRIPTION = "list_description";
 
     public static final String KEY_ITEMNAME = "item_name";
-    public static final String KEY_ITEM_DESCRIPTION = "item_description";
 
     private static final String DATABASE_NAME = "ListDatabase";
     private static final String DATABASE_TABLE_LIST = "List";
@@ -29,13 +28,12 @@ public class ListDatabaseManager
             "create table " + DATABASE_TABLE_LIST +
                     "(" + KEY_ROWID + " integer primary key autoincrement, " +
                     KEY_LISTNAME + " text not null, " +
-                    KEY_LIST_DESCRIPTION + " text not null);";
+                    KEY_LIST_DESCRIPTION + " text);";
 
     private static final String DATABASE_CREATE_ITEM =
             "create table " + DATABASE_TABLE_ITEM +
                     "(" + KEY_ROWID + " integer primary key autoincrement, " +
-                    KEY_ITEMNAME + " text not null, " +
-                    KEY_ITEM_DESCRIPTION + " text not null);";
+                    KEY_ITEMNAME + " text not null);";
 
     private final Context context;
     private DatabaseHelper DBHelper;
@@ -88,11 +86,10 @@ public class ListDatabaseManager
         return db.insert(DATABASE_TABLE_LIST, null, initialValues);
     }
 
-    public long insertItem(String itemName, String itemDescription)
+    public long insertItem(String itemName)
     {
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_LISTNAME, itemName);
-        initialValues.put(KEY_LIST_DESCRIPTION, itemDescription);
         return db.insert(DATABASE_TABLE_LIST, null, initialValues);
     }
 
@@ -122,8 +119,7 @@ public class ListDatabaseManager
         return db.query(DATABASE_TABLE_ITEM, new String[]
                         {
                                 KEY_ROWID,
-                                KEY_ITEMNAME,
-                                KEY_ITEM_DESCRIPTION
+                                KEY_ITEMNAME
                         },
                 null, null, null, null, null);
     }
@@ -153,8 +149,7 @@ public class ListDatabaseManager
                 db.query(true, DATABASE_TABLE_ITEM, new String[]
                                 {
                                         KEY_ROWID,
-                                        KEY_ITEMNAME,
-                                        KEY_ITEM_DESCRIPTION
+                                        KEY_ITEMNAME
                                 },
                         KEY_ROWID + "=" + rowId,  null, null, null, null, null);
 
@@ -174,11 +169,10 @@ public class ListDatabaseManager
         return db.update(DATABASE_TABLE_LIST, args, KEY_ROWID + "=" + rowId, null) > 0;
     }
 
-    public boolean updateItem(long rowId, String itemName, String itemDescription)
+    public boolean updateItem(long rowId, String itemName)
     {
         ContentValues args = new ContentValues();
         args.put(KEY_ITEMNAME, itemName);
-        args.put(KEY_ITEM_DESCRIPTION, itemDescription);
         return db.update(DATABASE_TABLE_ITEM, args, KEY_ROWID + "=" + rowId, null) > 0;
     }
 }
