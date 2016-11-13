@@ -1,14 +1,14 @@
-package com.example.carl.list;
+package com.example.carl.list.activities;
 
 import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
+
+import com.example.carl.list.ListDatabaseManager;
+import com.example.carl.list.R;
 
 public class HomeActivity extends ListActivity {
 
@@ -22,8 +22,8 @@ public class HomeActivity extends ListActivity {
         listDatabaseManager = new ListDatabaseManager(this);
 
         listDatabaseManager.open();
-        //listDatabaseManager.insertList("Games", "The games");
-        //listDatabaseManager.insertItem("FFXV", "New Final Fantasy");
+        listDatabaseManager.insertList("Games", "The games");
+        listDatabaseManager.insertItem("FFXV", "New Final Fantasy");
         Cursor cursor = listDatabaseManager.getAllLists();
         cursor.moveToFirst();
         //String listName = cursor.getString(1);
@@ -39,6 +39,8 @@ public class HomeActivity extends ListActivity {
                 startActivity(new Intent(HomeActivity.this, NewListActivity.class));
             }
         });
+
+
     }
 
     @Override

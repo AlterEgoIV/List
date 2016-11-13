@@ -1,9 +1,11 @@
-package com.example.carl.list;
+package com.example.carl.list.activities;
 
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+
+import com.example.carl.list.R;
 
 /**
  * Created by Carl on 10/11/2016.

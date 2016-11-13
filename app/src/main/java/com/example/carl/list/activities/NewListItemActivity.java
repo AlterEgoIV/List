@@ -1,9 +1,11 @@
-package com.example.carl.list;
+package com.example.carl.list.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.carl.list.R;
 
 public class NewListItemActivity extends AppCompatActivity
 {
