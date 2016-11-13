@@ -27,13 +27,13 @@ public class ListDatabaseManager
     private static final String DATABASE_CREATE_LIST =
             "create table " + DATABASE_TABLE_LIST +
                     "(" + KEY_ROWID + " integer primary key autoincrement, " +
-                    KEY_LISTNAME + " text not null, " +
+                    KEY_LISTNAME + " text, " +
                     KEY_LIST_DESCRIPTION + " text);";
 
     private static final String DATABASE_CREATE_ITEM =
             "create table " + DATABASE_TABLE_ITEM +
                     "(" + KEY_ROWID + " integer primary key autoincrement, " +
-                    KEY_ITEMNAME + " text not null);";
+                    KEY_ITEMNAME + " text);";
 
     private final Context context;
     private DatabaseHelper DBHelper;

@@ -3,6 +3,7 @@ package com.example.carl.list.activities;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.carl.list.ListDatabaseManager;
 import com.example.carl.list.R;
@@ -20,6 +21,7 @@ public class NewListItemActivity extends AppCompatActivity
         setContentView(R.layout.activity_new_list_item);
 
         listDatabaseManager = new ListDatabaseManager(this);
+        listDatabaseManager.open();
 
         // Button addList onClickListener
         findViewById(R.id.addItem).setOnClickListener(new View.OnClickListener()
@@ -32,8 +34,15 @@ public class NewListItemActivity extends AppCompatActivity
                 if(userItem.getItemName().length() > 0)
                 {
                     listDatabaseManager.insertItem(userItem.getItemName());
+                    findViewById(R.id.newItem).setContentDescription("");
+                }
+                else
+                {
+                    Toast.makeText(NewListItemActivity.this, "Must enter text", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+        //listDatabaseManager.close();
     }
 }

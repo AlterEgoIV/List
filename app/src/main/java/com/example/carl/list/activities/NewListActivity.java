@@ -20,6 +20,7 @@ public class NewListActivity extends AppCompatActivity
         setContentView(R.layout.activity_new_list);
 
         listDatabaseManager = new ListDatabaseManager(this);
+        listDatabaseManager.open();
 
         // Button addList onClickListener
         findViewById(R.id.addList).setOnClickListener(new View.OnClickListener()
@@ -32,6 +33,7 @@ public class NewListActivity extends AppCompatActivity
                 if(userList.getListName().length() > 0)
                 {
                     listDatabaseManager.insertList(userList.getListName(), userList.getListDescription());
+                    //listDatabaseManager.close();
                 }
 
                 startActivity(new Intent(NewListActivity.this, NewListItemActivity.class));

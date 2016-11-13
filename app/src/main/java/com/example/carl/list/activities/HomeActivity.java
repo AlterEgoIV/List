@@ -39,8 +39,6 @@ public class HomeActivity extends ListActivity {
                 startActivity(new Intent(HomeActivity.this, NewListActivity.class));
             }
         });
-
-
     }
 
     @Override
