@@ -22,7 +22,7 @@ public class NewListItemActivity extends AppCompatActivity
         listDatabaseManager = new ListDatabaseManager(this);
 
         // Button addList onClickListener
-        findViewById(R.id.addList).setOnClickListener(new View.OnClickListener()
+        findViewById(R.id.addItem).setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
