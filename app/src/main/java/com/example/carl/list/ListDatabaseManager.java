@@ -22,7 +22,7 @@ public class ListDatabaseManager
 
     private static final String DATABASE_NAME = "ListDatabase";
     private static final String DATABASE_TABLE_LIST = "List";
-    private static final String DATABASE_TABLE_ITEM = "Item";
+    private static final String DATABASE_TABLE_ITEM = "UserItem";
     private static final int DATABASE_VERSION = 1;
 
     private static final String DATABASE_CREATE_LIST =
