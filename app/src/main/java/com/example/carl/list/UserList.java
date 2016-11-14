@@ -24,4 +24,10 @@ public class UserList
     {
         return listDescription;
     }
+
+    @Override
+    public String toString()
+    {
+        return listName;
+    }
 }

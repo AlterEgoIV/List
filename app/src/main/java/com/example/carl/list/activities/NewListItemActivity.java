@@ -3,6 +3,7 @@ package com.example.carl.list.activities;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.carl.list.ListDatabaseManager;
@@ -29,12 +30,15 @@ public class NewListItemActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                userItem = new UserItem(findViewById(R.id.newItem).toString());
+                //userItem = new UserItem(((EditText)findViewById(R.id.newItem)).getText().toString());
+                String itemName = ((EditText)findViewById(R.id.newItem)).getText().toString();
 
-                if(userItem.getItemName().length() > 0)
+                if(!itemName.equals(""))
                 {
+                    userItem = new UserItem(itemName);
                     listDatabaseManager.insertItem(userItem.getItemName());
-                    findViewById(R.id.newItem).setContentDescription("");
+                    //findViewById(R.id.newItem).setContentDescription("");
+                    ((EditText)findViewById(R.id.newItem)).setText("");
                 }
                 else
                 {

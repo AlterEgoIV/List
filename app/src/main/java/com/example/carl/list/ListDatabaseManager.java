@@ -18,6 +18,7 @@ public class ListDatabaseManager
     public static final String KEY_LIST_DESCRIPTION = "list_description";
 
     public static final String KEY_ITEMNAME = "item_name";
+    public static final String KEY_LISTID = "list_id";
 
     private static final String DATABASE_NAME = "ListDatabase";
     private static final String DATABASE_TABLE_LIST = "List";
@@ -27,14 +28,15 @@ public class ListDatabaseManager
     private static final String DATABASE_CREATE_LIST =
             "create table " + DATABASE_TABLE_LIST +
                     "(" + KEY_ROWID + " integer primary key autoincrement, " +
-                    KEY_LISTNAME + " text, " +
+                    KEY_LISTNAME + " text unique not null, " +
                     KEY_LIST_DESCRIPTION + " text);";
 
     private static final String DATABASE_CREATE_ITEM =
             "create table " + DATABASE_TABLE_ITEM +
                     "(" + KEY_ROWID + " integer primary key autoincrement, " +
                     KEY_ITEMNAME + " text, " +
-                    "foreign key(" + KEY_ROWID + ") references List(" + KEY_ROWID + "));";
+                    KEY_LISTID + " integer not null, " +
+                    "foreign key(" + KEY_LISTID + ") references List(" + KEY_ROWID + "));";
 
     private final Context context;
     private DatabaseHelper DBHelper;
@@ -90,8 +92,8 @@ public class ListDatabaseManager
     public long insertItem(String itemName)
     {
         ContentValues initialValues = new ContentValues();
-        initialValues.put(KEY_LISTNAME, itemName);
-        return db.insert(DATABASE_TABLE_LIST, null, initialValues);
+        initialValues.put(KEY_ITEMNAME, itemName);
+        return db.insert(DATABASE_TABLE_ITEM, null, initialValues);
     }
 
     public boolean deleteList(long rowId)
@@ -101,7 +103,7 @@ public class ListDatabaseManager
 
     public boolean deleteItem(long rowId)
     {
-        return db.delete(DATABASE_TABLE_LIST, KEY_ROWID + "=" + rowId, null) > 0;
+        return db.delete(DATABASE_TABLE_ITEM, KEY_ROWID + "=" + rowId, null) > 0;
     }
 
     public Cursor getAllLists()
