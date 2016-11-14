@@ -21,7 +21,7 @@ public class ListDatabaseManager
 
     private static final String DATABASE_NAME = "ListDatabase";
     private static final String DATABASE_TABLE_LIST = "List";
-    private static final String DATABASE_TABLE_ITEM = "UserItem";
+    private static final String DATABASE_TABLE_ITEM = "Item";
     private static final int DATABASE_VERSION = 1;
 
     private static final String DATABASE_CREATE_LIST =
@@ -33,7 +33,8 @@ public class ListDatabaseManager
     private static final String DATABASE_CREATE_ITEM =
             "create table " + DATABASE_TABLE_ITEM +
                     "(" + KEY_ROWID + " integer primary key autoincrement, " +
-                    KEY_ITEMNAME + " text);";
+                    KEY_ITEMNAME + " text, " +
+                    "foreign key(" + KEY_ROWID + ") references List(" + KEY_ROWID + "));";
 
     private final Context context;
     private DatabaseHelper DBHelper;
