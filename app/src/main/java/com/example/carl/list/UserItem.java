@@ -17,4 +17,10 @@ public class UserItem
     {
         return itemName;
     }
+
+    @Override
+    public String toString()
+    {
+        return itemName;
+    }
 }

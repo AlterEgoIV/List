@@ -68,6 +68,6 @@ public class HomeActivity extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id)
     {
-
+        startActivity(new Intent(this, UserListActivity.class));
     }
 }
