@@ -16,11 +16,14 @@ public class NewListActivity extends AppCompatActivity
 {
     private ListDatabaseManager listDatabaseManager;
     private UserList userList;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_list);
+
+        intent = new Intent(this, NewListItemActivity.class);
 
         listDatabaseManager = new ListDatabaseManager(this);
         listDatabaseManager.open();
@@ -39,9 +42,10 @@ public class NewListActivity extends AppCompatActivity
                 if(!listName.equals(""))
                 {
                     userList = new UserList(listName, listDescription);
-                    listDatabaseManager.insertList(userList.getListName(), userList.getListDescription());
+                    long listId = listDatabaseManager.insertList(userList.getListName(), userList.getListDescription());
 
-                    startActivity(new Intent(NewListActivity.this, NewListItemActivity.class));
+                    intent.putExtra("listid", listId);
+                    startActivity(intent);
                 }
                 else
                 {

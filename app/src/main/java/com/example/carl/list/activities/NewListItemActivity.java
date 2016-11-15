@@ -1,5 +1,6 @@
 package com.example.carl.list.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,12 +15,15 @@ public class NewListItemActivity extends AppCompatActivity
 {
     private ListDatabaseManager listDatabaseManager;
     private UserItem userItem;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_list_item);
+
+        intent = getIntent();
 
         listDatabaseManager = new ListDatabaseManager(this);
         listDatabaseManager.open();
@@ -36,8 +40,7 @@ public class NewListItemActivity extends AppCompatActivity
                 if(!itemName.equals(""))
                 {
                     userItem = new UserItem(itemName);
-                    listDatabaseManager.insertItem(userItem.getItemName(), userItem.getListId());
-                    //findViewById(R.id.newItem).setContentDescription("");
+                    listDatabaseManager.insertItem(userItem.getItemName(), intent.getExtras().getLong("listid"));
                     ((EditText)findViewById(R.id.newItem)).setText("");
                 }
                 else
