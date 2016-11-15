@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:hint="New Item..."
+        android:hint="@string/new_item"
         android:ems="10"
         android:id="@+id/newItem"
         android:layout_alignParentTop="true"
@@ -25,7 +25,7 @@
         android:layout_toStartOf="@+id/addItem"/>
 
     <Button
-        android:text="Add"
+        android:text="@string/add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"

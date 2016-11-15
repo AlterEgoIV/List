@@ -26,29 +26,32 @@ public class HomeActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        userLists = new ArrayList<UserList>();
+        userLists = new ArrayList<>();
 
         listDatabaseManager = new ListDatabaseManager(this);
 
         listDatabaseManager.open();
-        //listDatabaseManager.insertList("Games", "The games");
-        //listDatabaseManager.insertItem("FFXV");
+
+        // Return all rows from the List table to the Cursor
         Cursor cursor = listDatabaseManager.getAllLists();
+
+        // Position the Cursor at the first row in the List table
         cursor.moveToFirst();
 
+        // While the Cursor is still pointing at a row in the List table
         while(!cursor.isAfterLast())
         {
+            // Create a UserList which holds the current rows list name and list description
             UserList userList = new UserList(cursor.getString(1), cursor.getString(2));
 
-            userLists.add(userList);
+            userLists.add(userList); // add the UserList to the ArrayList of UserLists
 
-            cursor.moveToNext();
+            cursor.moveToNext(); // Move the Cursor to the next row
         }
 
-        setListAdapter(new ArrayAdapter<UserList>(this, android.R.layout.simple_list_item_1, userLists));
+        // Set the ListView to display the contents of userLists
+        setListAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, userLists));
 
-        // String listName = cursor.getString(1);
-        // Log.d("Listname", listName);
         cursor.close();
         listDatabaseManager.close();
 

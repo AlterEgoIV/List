@@ -31,25 +31,17 @@ public class NewListActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                /*userList = new UserList(findViewById(R.id.listName).toString(), findViewById(R.id.listDescription).toString());
-
-                if(userList.getListName().length() > 0)
-                {
-                    listDatabaseManager.insertList(userList.getListName(), userList.getListDescription());
-                    //listDatabaseManager.close();
-                }
-
-                startActivity(new Intent(NewListActivity.this, NewListItemActivity.class));*/
-
+                // Find the list name and description from the EditTexts
                 String listName = ((EditText)findViewById(R.id.listName)).getText().toString();
                 String listDescription = ((EditText)findViewById(R.id.listDescription)).getText().toString();
 
+                // If the list name is not empty
                 if(!listName.equals(""))
                 {
                     userList = new UserList(listName, listDescription);
                     listDatabaseManager.insertList(userList.getListName(), userList.getListDescription());
-                    //findViewById(R.id.newItem).setContentDescription("");
-                    //((EditText)findViewById(R.id.newItem)).setText("");
+
+                    startActivity(new Intent(NewListActivity.this, NewListItemActivity.class));
                 }
                 else
                 {
