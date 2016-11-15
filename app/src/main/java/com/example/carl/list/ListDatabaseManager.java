@@ -123,7 +123,8 @@ public class ListDatabaseManager
         return db.query(DATABASE_TABLE_ITEM, new String[]
                         {
                                 KEY_ROWID,
-                                KEY_ITEMNAME
+                                KEY_ITEMNAME,
+                                KEY_LISTID
                         },
                 null, null, null, null, null);
     }

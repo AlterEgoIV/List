@@ -42,7 +42,7 @@ public class HomeActivity extends ListActivity {
         while(!cursor.isAfterLast())
         {
             // Create a UserList which holds the current rows list name and list description
-            UserList userList = new UserList(cursor.getString(1), cursor.getString(2));
+            UserList userList = new UserList(cursor.getLong(0), cursor.getString(1), cursor.getString(2));
 
             userLists.add(userList); // add the UserList to the ArrayList of UserLists
 
@@ -68,6 +68,10 @@ public class HomeActivity extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id)
     {
-        startActivity(new Intent(this, UserListActivity.class));
+        Intent intent = new Intent(this, UserListActivity.class);
+
+        intent.putExtra("listid", id);
+
+        startActivity(intent);
     }
 }
