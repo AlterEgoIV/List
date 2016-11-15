@@ -45,6 +45,7 @@ public class NewListActivity extends AppCompatActivity
                     long listId = listDatabaseManager.insertList(userList.getListName(), userList.getListDescription());
 
                     intent.putExtra("listid", listId);
+                    intent.putExtra("listname", listName);
                     startActivity(intent);
                 }
                 else

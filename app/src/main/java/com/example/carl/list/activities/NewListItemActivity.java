@@ -1,17 +1,19 @@
 package com.example.carl.list.activities;
 
+import android.app.ListActivity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.carl.list.ListDatabaseManager;
 import com.example.carl.list.R;
 import com.example.carl.list.UserItem;
 
-public class NewListItemActivity extends AppCompatActivity
+public class NewListItemActivity extends ListActivity
 {
     private ListDatabaseManager listDatabaseManager;
     private UserItem userItem;
@@ -24,6 +26,7 @@ public class NewListItemActivity extends AppCompatActivity
         setContentView(R.layout.activity_new_list_item);
 
         intent = getIntent();
+        ((TextView)findViewById(R.id.listName)).setText(intent.getExtras().getString("listname"));
 
         listDatabaseManager = new ListDatabaseManager(this);
         listDatabaseManager.open();
@@ -49,7 +52,5 @@ public class NewListItemActivity extends AppCompatActivity
                 }
             }
         });
-
-        //listDatabaseManager.close();
     }
 }
