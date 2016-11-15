@@ -89,10 +89,11 @@ public class ListDatabaseManager
         return db.insert(DATABASE_TABLE_LIST, null, initialValues);
     }
 
-    public long insertItem(String itemName)
+    public long insertItem(String itemName, long listId)
     {
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_ITEMNAME, itemName);
+        initialValues.put(KEY_LISTID, listId);
         return db.insert(DATABASE_TABLE_ITEM, null, initialValues);
     }
 

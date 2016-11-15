@@ -36,7 +36,7 @@ public class NewListItemActivity extends AppCompatActivity
                 if(!itemName.equals(""))
                 {
                     userItem = new UserItem(itemName);
-                    listDatabaseManager.insertItem(userItem.getItemName());
+                    listDatabaseManager.insertItem(userItem.getItemName(), userItem.getListId());
                     //findViewById(R.id.newItem).setContentDescription("");
                     ((EditText)findViewById(R.id.newItem)).setText("");
                 }

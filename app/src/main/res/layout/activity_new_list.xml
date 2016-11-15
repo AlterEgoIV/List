@@ -20,7 +20,10 @@
         android:ems="10"
         android:id="@+id/listName"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -28,20 +31,20 @@
         android:inputType="text|textMultiLine"
         android:hint="@string/list_description"
         android:ems="10"
+        android:id="@+id/listDescription"
         android:layout_below="@+id/listName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
-        android:id="@+id/listDescription" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        app:fabSize="mini"
-        app:srcCompat="@android:drawable/ic_menu_add"
-        android:id="@+id/addList"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"/>
+
+    <Button
+        android:text="Create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/listDescription"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/addList"/>
 
 </RelativeLayout>
