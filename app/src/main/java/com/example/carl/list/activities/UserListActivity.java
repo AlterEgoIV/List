@@ -31,6 +31,7 @@ public class UserListActivity extends ListActivity
         setContentView(R.layout.activity_home);
 
         listDatabaseManager = new ListDatabaseManager(this);
+        listDatabaseManager.open();
         userItems = new ArrayList<>();
 
         Cursor cursor = listDatabaseManager.getAllItems();
@@ -43,14 +44,14 @@ public class UserListActivity extends ListActivity
 
         while(!cursor.isAfterLast())
         {
-            if(cursor.getLong(1) == id)
+            if(cursor.getLong(2) == id)
             {
-                UserItem userItem = new UserItem(cursor.getString(0));
+                UserItem userItem = new UserItem(cursor.getString(1));
 
                 userItems.add(userItem);
-
-                cursor.moveToNext();
             }
+
+            cursor.moveToNext();
         }
 
         setListAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, userItems));

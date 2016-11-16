@@ -70,7 +70,7 @@ public class HomeActivity extends ListActivity {
     {
         Intent intent = new Intent(this, UserListActivity.class);
 
-        intent.putExtra("listid", id);
+        intent.putExtra("listid", userLists.get(position).getId());
 
         startActivity(intent);
     }
