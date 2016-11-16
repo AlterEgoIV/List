@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.carl.list.ListDatabaseManager;
 import com.example.carl.list.R;
@@ -39,6 +40,8 @@ public class UserListActivity extends ListActivity
         cursor.moveToFirst();
 
         intent = getIntent();
+
+        ((TextView)findViewById(R.id.listName)).setText(intent.getExtras().getString("listname"));
 
         long id = intent.getExtras().getLong("listid");
 
