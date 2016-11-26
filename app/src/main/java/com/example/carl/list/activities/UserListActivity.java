@@ -29,7 +29,7 @@ public class UserListActivity extends ListActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_userlist);
 
         listDatabaseManager = new ListDatabaseManager(this);
         listDatabaseManager.open();
@@ -41,7 +41,11 @@ public class UserListActivity extends ListActivity
 
         intent = getIntent();
 
-        ((TextView)findViewById(R.id.listName)).setText(intent.getExtras().getString("listname"));
+        //((TextView)findViewById(R.id.listName)).setText(intent.getExtras().getString("listname"));
+
+        TextView textView = ((TextView)findViewById(R.id.listName));
+
+        textView.setText(intent.getExtras().getString("listname"));
 
         long id = intent.getExtras().getLong("listid");
 
