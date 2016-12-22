@@ -31,16 +31,12 @@ public class HomeActivity extends ListActivity {
         userLists = new ArrayList<>();
         listDatabaseManager = new ListDatabaseManager(this);
 
-        listDatabaseManager.open();
-
         getListsFromDatabase();
 
         ((ListView)findViewById(android.R.id.list)).setEmptyView(findViewById(R.id.empty_list_item));
 
         // Set the ListView to display the contents of userLists
         setListAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, userLists));
-
-        //listDatabaseManager.close();
 
         findViewById(R.id.newList).setOnClickListener(new View.OnClickListener()
         {
@@ -54,6 +50,10 @@ public class HomeActivity extends ListActivity {
 
     private void getListsFromDatabase()
     {
+        listDatabaseManager.open();
+
+        userLists.clear();
+
         // Return all rows from the List table to the Cursor
         Cursor cursor = listDatabaseManager.getAllLists();
 
@@ -71,7 +71,8 @@ public class HomeActivity extends ListActivity {
             cursor.moveToNext(); // Move the Cursor to the next row
         }
 
-        //cursor.close();
+        cursor.close();
+        listDatabaseManager.close();
     }
 
     @Override
