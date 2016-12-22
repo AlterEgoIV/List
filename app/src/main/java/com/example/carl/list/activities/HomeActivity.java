@@ -16,6 +16,8 @@ import com.example.carl.list.UserList;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.sql.DriverManager.println;
+
 public class HomeActivity extends ListActivity {
 
     private ListDatabaseManager listDatabaseManager;
@@ -27,11 +29,31 @@ public class HomeActivity extends ListActivity {
         setContentView(R.layout.activity_home);
 
         userLists = new ArrayList<>();
-
         listDatabaseManager = new ListDatabaseManager(this);
 
         listDatabaseManager.open();
 
+        getListsFromDatabase();
+
+        ((ListView)findViewById(android.R.id.list)).setEmptyView(findViewById(R.id.empty_list_item));
+
+        // Set the ListView to display the contents of userLists
+        setListAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, userLists));
+
+        //listDatabaseManager.close();
+
+        findViewById(R.id.newList).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                startActivity(new Intent(HomeActivity.this, NewListActivity.class));
+            }
+        });
+    }
+
+    private void getListsFromDatabase()
+    {
         // Return all rows from the List table to the Cursor
         Cursor cursor = listDatabaseManager.getAllLists();
 
@@ -49,20 +71,7 @@ public class HomeActivity extends ListActivity {
             cursor.moveToNext(); // Move the Cursor to the next row
         }
 
-        // Set the ListView to display the contents of userLists
-        setListAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, userLists));
-
-        cursor.close();
-        listDatabaseManager.close();
-
-        findViewById(R.id.floatingActionButton).setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                startActivity(new Intent(HomeActivity.this, NewListActivity.class));
-            }
-        });
+        //cursor.close();
     }
 
     @Override
@@ -75,5 +84,14 @@ public class HomeActivity extends ListActivity {
         intent.putExtra("listdescription", userLists.get(position).getListDescription());
 
         startActivity(intent);
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+
+        getListsFromDatabase();
+        setListAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, userLists));
     }
 }
