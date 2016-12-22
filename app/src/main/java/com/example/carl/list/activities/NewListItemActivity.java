@@ -54,6 +54,7 @@ public class NewListItemActivity extends ListActivity
                     userItem = new UserItem(itemName);
                     listDatabaseManager.insertItem(userItem.getItemName(), intent.getExtras().getLong("listid"));
                     ((EditText)findViewById(R.id.newItem)).setText("");
+                    userItems.add(userItem);
                     ((ArrayAdapter)getListAdapter()).notifyDataSetChanged();
                 }
                 else
