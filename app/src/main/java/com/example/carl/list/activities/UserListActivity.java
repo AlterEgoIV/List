@@ -41,11 +41,11 @@ public class UserListActivity extends ListActivity
 
         intent = getIntent();
 
-        //((TextView)findViewById(R.id.listName)).setText(intent.getExtras().getString("listname"));
-
         TextView textView = ((TextView)findViewById(R.id.listName));
+        TextView textView2 = ((TextView)findViewById(R.id.listDescription));
 
         textView.setText(intent.getExtras().getString("listname"));
+        textView2.setText(intent.getExtras().getString("listdescription"));
 
         long id = intent.getExtras().getLong("listid");
 
@@ -64,11 +64,5 @@ public class UserListActivity extends ListActivity
         setListAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, userItems));
 
         cursor.close();
-    }
-
-    @Override
-    protected void onListItemClick(ListView l, View v, int position, long id)
-    {
-
     }
 }
